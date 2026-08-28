@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.25.21/dist/css/uikit.min.css" />
+        <link rel="stylesheet" href="./resources/ol.css">
+        <link rel="stylesheet" href="resources/fontawesome-all.min.css">
+        <link href="resources/photon-geocoder-autocomplete.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="./resources/ol-layerswitcher.css">
+        <link rel="stylesheet" href="./resources/qgis2web.css">
+        <link rel="stylesheet" href="./resources/style.css">
+        <title>WebGIS DBK 202608</title>
+    </head>
+    <body>
+        <nav class="uk-background-primary  uk-navbar" uk-navbar>
+            <div class="uk-navbar-left">              
+                <a class="uk-navbar-item uk-logo" href="/"><img width="75" height="auto" src="images/dbk_logo_transparent.png"/>WebGIS</a>
+                <ul class="uk-navbar-nav">
+                <li>
+                    <input id="coordInput" class="uk-input" style="width:180px;" type="text" placeholder="Lat, Lon">
+                </li>
+                <li>
+                    <button class="uk-button uk-button-default" onclick="searchCoordinate()">Cari by Kordinat</button>
+                </li>
+                </ul>
+            </div>
+            <div class="uk-navbar-right">
+                
+                <ul class="uk-navbar-nav">
+                    <a class="uk-navbar-item" href="#modal-download" uk-toggle>Download Data</a>
+                </ul>
+                <ul class="uk-navbar-nav">
+                    <li>
+                        <select class="uk-select" id="aoiDropdown" onchange="zoomToAOI()">
+                            <option value="" disabled selected>Pilih AOI</option>
+                            <option value="area1">Camp B Joloi</option>
+                            <option value="area2">Ampar</option>
+                            <option value="area3">Muara Laung</option>
+                            <option value="area4">PIT DBK</option>
+                        </select>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!-- Konten WebGIS -->
+        <section class="uk-height-1-1">
+            <div id="map">
+                <div id="popup" class="ol-popup">
+                    <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+                    <div id="popup-content">
+                    </div>
+                </div>
+            </div>
+            <div id="mouse-coord" style="
+                    position: absolute;
+                    bottom: 10px;
+                    left: 10px;
+                    background: rgba(255,255,255,0.8);
+                    padding: 4px 8px;
+                    border-radius: 4px;
+                    font-size: 12px;
+                    font-family: monospace;
+                    z-index: 1000;">
+                Koordinat: -
+                </div>
+        </section>
+        <!-- This is the modal -->
+        <div id="modal-download" uk-modal>
+            <div class="uk-modal-dialog uk-modal-body">
+                <h2 class="uk-modal-title">Keterangan</h2>
+                <a href="#"><div class="uk-button uk-button-primary uk-light">Download Data</div></a>
+                <p>Data dalam bentuk geojson, bisa dibuka di qgis lalu export jadi shp atau tipe data lainnya</p>
+            </div>
+        </div>
+        <!-- Modal login -->
+        <div id="loginModal">
+        <div class="login-box">
+            <h2>Login WebGIS</h2>
+            <input type="text" id="username" placeholder="Username"><br>
+            <input type="password" id="password" placeholder="Password"><br>
+            <button onclick="checkLogin()">Login</button>
+            <p id="error" style="color:red; display:none;">Username / Password salah!</p>
+        </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/uikit@3.25.21/dist/js/uikit.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/uikit@3.25.21/dist/js/uikit-icons.min.js"></script>
+        <script src="resources/qgis2web_expressions.js"></script>
+        <script src="./resources/functions.js"></script>
+        <script src="./resources/ol.js"></script>
+        <script src="./resources/ol-layerswitcher.js"></script>
+        <script src="resources/photon-geocoder-autocomplete.min.js"></script>
+        <script src="resources/olms.js"></script>
+        <script src="layers/FUNGSI_KAWASAN_HUTAN_SK6627_2021_4.js"></script><script src="layers/HPH_AREA_DBKBI_CLUSTER_5.js"></script><script src="layers/WIUP_6.js"></script><script src="layers/WIUPBatuanMuaraKaryaSejahtera_7.js"></script><script src="layers/IUP_OP_BI_8.js"></script><script src="layers/IUP_OP_DBK_9.js"></script><script src="layers/PPKH_COKAL_AREA_10.js"></script><script src="layers/PPKH_COKAL_POLYLINE_11.js"></script><script src="layers/ArealKoridor_12.js"></script><script src="layers/Penyesuaian_Ijin_Koridor_DBK_2025_Polygon__13.js"></script><script src="layers/Penyesuaian_Ijin_Koridor_DBK_2025_14.js"></script><script src="layers/dbk_2014_15.js"></script><script src="layers/dbk_kadastral_bpn_muaralaung_16.js"></script><script src="layers/LAHAN_BEBAS_DBK_20260826_17.js"></script><script src="layers/KORIDORIJINKDP_18.js"></script><script src="layers/KoridordanMainroadOperasionalKDP_19.js"></script><script src="layers/TRACK_LOGGING_ROAD_DBK_BI_CLUSTER_20.js"></script><script src="layers/TRACK_SURVEY_ROAD_DBK_BI_CLUSTER_21.js"></script><script src="layers/TRACK_HAULING_ROAD_DBK_BI_CLUSTER_22.js"></script><script src="layers/CENTERLINE_DESIGN_ALL_SEGMENT_23.js"></script><script src="layers/POINT_STA_TEXT_MERGE_ALL_SEGMENT_R1_24.js"></script><script src="layers/Jalan_Hauling_DBK_Existing_dan_Konstruksi_r1_25.js"></script><script src="layers/lom_pit_2604_26.js"></script><script src="layers/DUMP_LOM_48M_27.js"></script><script src="layers/Realisasi_Bukaan_Lahan_DBK_2024_TW42026_TW2_Updated_EOM_Juni2026_r2_28.js"></script><script src="layers/datahotspot28082026_045154_29.js"></script><script src="layers/koordinat_kebakaran_hutan_20260828_30.js"></script>
+        <script src="styles/FUNGSI_KAWASAN_HUTAN_SK6627_2021_4_style.js"></script><script src="styles/HPH_AREA_DBKBI_CLUSTER_5_style.js"></script><script src="styles/WIUP_6_style.js"></script><script src="styles/WIUPBatuanMuaraKaryaSejahtera_7_style.js"></script><script src="styles/IUP_OP_BI_8_style.js"></script><script src="styles/IUP_OP_DBK_9_style.js"></script><script src="styles/PPKH_COKAL_AREA_10_style.js"></script><script src="styles/PPKH_COKAL_POLYLINE_11_style.js"></script><script src="styles/ArealKoridor_12_style.js"></script><script src="styles/Penyesuaian_Ijin_Koridor_DBK_2025_Polygon__13_style.js"></script><script src="styles/Penyesuaian_Ijin_Koridor_DBK_2025_14_style.js"></script><script src="styles/dbk_2014_15_style.js"></script><script src="styles/dbk_kadastral_bpn_muaralaung_16_style.js"></script><script src="styles/LAHAN_BEBAS_DBK_20260826_17_style.js"></script><script src="styles/KORIDORIJINKDP_18_style.js"></script><script src="styles/KoridordanMainroadOperasionalKDP_19_style.js"></script><script src="styles/TRACK_LOGGING_ROAD_DBK_BI_CLUSTER_20_style.js"></script><script src="styles/TRACK_SURVEY_ROAD_DBK_BI_CLUSTER_21_style.js"></script><script src="styles/TRACK_HAULING_ROAD_DBK_BI_CLUSTER_22_style.js"></script><script src="styles/CENTERLINE_DESIGN_ALL_SEGMENT_23_style.js"></script><script src="styles/POINT_STA_TEXT_MERGE_ALL_SEGMENT_R1_24_style.js"></script><script src="styles/Jalan_Hauling_DBK_Existing_dan_Konstruksi_r1_25_style.js"></script><script src="styles/lom_pit_2604_26_style.js"></script><script src="styles/DUMP_LOM_48M_27_style.js"></script><script src="styles/Realisasi_Bukaan_Lahan_DBK_2024_TW42026_TW2_Updated_EOM_Juni2026_r2_28_style.js"></script><script src="styles/datahotspot28082026_045154_29_style.js"></script><script src="styles/koordinat_kebakaran_hutan_20260828_30_style.js"></script>
+        <script src="./layers/layers.js" type="text/javascript"></script> 
+        <script src="./resources/Autolinker.min.js"></script>
+        <script src="./resources/qgis2web.js"></script>
+        <script src="./resources/main.js"></script>        
+    </body>
+</html>

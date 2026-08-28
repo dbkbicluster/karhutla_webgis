@@ -1,0 +1,101 @@
+.uk-navbar-left, .uk-navbar-right, [class*="uk-navbar-center"] {
+  align-items: center;
+}
+
+html, body {
+    background-color: #ffffff;
+}
+.ol-control > * {
+    background-color: #f8f8f8!important;
+    color: #444444!important;
+    border-radius: 0px;
+}
+.ol-attribution a, .gcd-gl-input::placeholder, .search-layer-input-search::placeholder {
+    color: #444444!important;
+}
+.search-layer-input-search {
+    background-color: #f8f8f8!important;
+}
+.ol-control > *:focus, .ol-control >*:hover {
+    background-color: rgba(248, 248, 248, 0.7)!important;
+} 
+.ol-control {
+    background-color: rgba(255,255,255,.4) !important;
+    padding: 2px !important;
+} 
+.uk-navbar-item {
+    color: #f8f8f8;
+    font-size: 16px;
+}
+html, body, #map {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+/* === Modal Login Overlay === */
+#loginModal {
+position: fixed;
+z-index: 99999;
+left: 0; top: 0;
+width: 100%; height: 100%;
+background: rgba(0,0,0,0.7);
+display: flex;
+justify-content: center;
+align-items: center;
+}
+.login-box {
+background: #fff;
+padding: 25px;
+border-radius: 10px;
+text-align: center;
+width: 300px;
+box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+.login-box input {
+width: 90%;
+padding: 8px;
+margin: 8px 0;
+border: 1px solid #ccc;
+border-radius: 6px;
+}
+.login-box button {
+padding: 10px 20px;
+border: none;
+background: #1e87f0;
+color: white;
+border-radius: 6px;
+cursor: pointer;
+}
+.login-box button:hover {
+background: #0f6ab4;
+}
+
+html, body {
+    background-color: #ffffff;
+}
+.ol-control > * {
+    background-color: #f8f8f8!important;
+    color: #444444!important;
+    border-radius: 0px;
+}
+.ol-attribution a, .gcd-gl-input::placeholder, .search-layer-input-search::placeholder {
+    color: #444444!important;
+}
+.search-layer-input-search {
+    background-color: #f8f8f8!important;
+}
+.ol-control > *:focus, .ol-control >*:hover {
+    background-color: rgba(248, 248, 248, 0.7)!important;
+} 
+.ol-control {
+    background-color: rgba(255,255,255,.4) !important;
+    padding: 2px !important;
+} 
+
+html, body, #map {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}

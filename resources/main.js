@@ -335,16 +335,26 @@ function initialiseForestFireDashboard() {
 
     if (mobile) {
       if (toggleBtn) {
-        toggleBtn.textContent = dashboardOpen ? 'Close Dashboard' : 'Open Dashboard';
+        toggleBtn.textContent = 'Close Dashboard';
         toggleBtn.style.display = 'inline-flex';
       }
-      forceLegendClosed();
-    } else {
       dashboardOpen = true;
-      if (toggleBtn) {
-        toggleBtn.style.display = 'none';
-      }
+      forceLegendClosed();
+      return;
+    }
+
+    if (toggleBtn) {
+      toggleBtn.textContent = dashboardOpen ? 'Close Dashboard' : 'Open Dashboard';
+      toggleBtn.style.display = dashboardOpen ? 'none' : 'inline-flex';
+    }
+
+    if (dashboardOpen) {
       restoreLegendForDesktop();
+    } else {
+      const legend = document.querySelector('.layer-switcher');
+      if (legend) {
+        legend.style.display = '';
+      }
     }
   }
 
@@ -372,17 +382,14 @@ function initialiseForestFireDashboard() {
 
   window.addEventListener('resize', () => {
     if (isMobile()) {
-      dashboardOpen = false;
-      forceLegendClosed();
-    } else {
       dashboardOpen = true;
-      restoreLegendForDesktop();
+      forceLegendClosed();
     }
     updateDashboardView();
   });
 
   if (isMobile()) {
-    dashboardOpen = false;
+    dashboardOpen = true;
   }
 
   if (typeof layerSwitcher !== 'undefined' && isMobile()) {

@@ -35,37 +35,8 @@ html, body {
     color: #f8f8f8;
     font-size: 16px;
 }
-html, body, #map {
-    width: 100%;
-    height: 100%;
-    padding: 0;
-    margin: 0;
-}
 
-* {
-    box-sizing: border-box;
-}
 
-html, body {
-    overflow-x: hidden;
-    -webkit-text-size-adjust: 100%;
-    text-size-adjust: 100%;
-}
-
-body {
-    min-height: 100vh;
-    min-height: 100dvh;
-    min-height: 100svh;
-    padding-top: var(--dbk-safe-top);
-    padding-bottom: var(--dbk-safe-bottom);
-    padding-left: var(--dbk-safe-left);
-    padding-right: var(--dbk-safe-right);
-}
-
-section.uk-height-1-1 {
-    height: calc(100dvh - var(--dbk-nav-height) - var(--dbk-safe-top) - var(--dbk-safe-bottom));
-    min-height: calc(100dvh - var(--dbk-nav-height) - var(--dbk-safe-top) - var(--dbk-safe-bottom));
-}
 /* === Modal Login Overlay === */
 #loginModal {
 position: fixed;
@@ -140,9 +111,6 @@ html, body {
     padding: 0;
 }
 
-section.uk-height-1-1 {
-    position: relative;
-}
 
 /* =========================================================
    DBK WEBGIS RESPONSIVE
@@ -385,32 +353,33 @@ section.uk-height-1-1 {
    MAP
    ========================================================= */
 
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
 section.uk-height-1-1 {
-    position: relative;
+  height: 100vh;
+  height: 100dvh;   /* lebih akurat untuk mobile browser dgn address bar */
+  width: 100%;
 }
 
 #map {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    min-height: 320px;
-    overflow: hidden;
-    flex: 1 1 auto;
-}
-
-#map .ol-viewport,
-#map .ol-layer,
-#map canvas {
-    width: 100% !important;
-    height: 100% !important;
-    max-width: 100% !important;
-    max-height: 100% !important;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 320px;
+  overflow: hidden;
 }
 
 .fire-dashboard {
     position: absolute;
-    top: 16px;
-    left: 16px;
+    top: 5px;
+    left: 50px;
     right: auto;
     width: min(320px, calc(100vw - 32px));
     max-height: calc(100% - 32px);
@@ -430,9 +399,9 @@ section.uk-height-1-1 {
 
 .fire-dashboard-toggle {
     position: absolute;
-    top: 150px;
-    left: 16px;
-    display: none;
+    top: 10px;
+    left: 50px;
+    display: inline-flex;
     z-index: 1001;
     border: 1px solid rgba(249, 115, 22, 0.65);
     background: rgba(249, 115, 22, 0.95);
@@ -701,21 +670,73 @@ section.uk-height-1-1 {
     display: none;
 }
 
-@media (max-width: 900px) {
-    .fire-dashboard {
-        top: 120px;
-        bottom: auto;
-        left: 10px;
-        right: 10px;
-        width: auto;
-        max-width: calc(100vw - 20px);
-        max-height: calc(100vh - 150px);
-        min-height: 300px;
-        z-index: 900;
-    }
+.layer-switcher {
+    top: 100px;
+}
 
-    .layer-switcher {
-        display: none !important;
+.fire-status-legend {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    z-index: 1100;
+    background: rgba(15, 23, 42, 0.86);
+    color: #f8fafc;
+    border: 1px solid rgba(148, 163, 184, 0.35);
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-size: 11px;
+    box-shadow: 0 12px 24px rgba(15, 23, 42, 0.18);
+    min-width: 140px;
+}
+
+.fire-legend-title {
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.8;
+    margin-bottom: 8px;
+}
+
+.fire-legend-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 4px;
+    color: #e2e8f0;
+}
+
+.fire-legend-swatch {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.5);
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,0.2);
+}
+
+.fire-legend-danger {
+    background: #ef4444;
+}
+
+.fire-legend-medium {
+    background: #facc15;
+}
+
+.fire-legend-safe {
+    background: #22c55e;
+}
+
+@media (max-width: 900px) {
+    .fire-dashboard-toggle {
+        display: inline-flex;
+    }
+    .fire-dashboard {
+        top: 50px;
+        right: 20px;
+        left: 50px;
+        width: auto;
+        max-height: calc(70vh - 0px);
+        min-height: 260px;
     }
 
     .fire-dashboard-header h3 {
@@ -759,11 +780,11 @@ section.uk-height-1-1 {
     }
 
     .fire-dashboard {
-        top: 132px;
-        right: 12px;
-        left: 12px;
+        top: 50px;
+        right: 20px;
+        left: 50px;
         width: auto;
-        max-height: calc(100vh - 170px);
+        max-height: calc(50vh - 00px);
         min-height: 260px;
     }
 
@@ -774,25 +795,9 @@ section.uk-height-1-1 {
     .fire-incident-list {
         max-height: calc(100vh - 280px);
     }
-
-    .layer-switcher {
-        display: none !important;
-    }
 }
 
-.ol-control {
-    z-index: 100;
-}
 
-.layer-switcher {
-    z-index: 1200;
-    right: 12px;
-    top: 72px;
-}
-
-.layer-switcher .panel {
-    max-width: 270px;
-}
 
 /* =========================================================
    QGIS2WEB LAYER SWITCHER
@@ -942,4 +947,8 @@ section.uk-height-1-1 {
         max-width: 100% !important;
         height: auto !important;
     }
+}
+
+canvas {
+    max-width: fit-content;
 }

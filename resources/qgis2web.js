@@ -59,7 +59,7 @@ styleCursorMove();
 
 ////small screen definition
     var hasTouchScreen = map.getViewport().classList.contains('ol-touch');
-    var isSmallScreen = window.innerWidth < 650;
+    var isSmallScreen = window.innerWidth <= 1280;
 
 ////controls container
 
@@ -1067,19 +1067,27 @@ let measuring = false;
 
 var layerSwitcher = new ol.control.LayerSwitcher({
     activationMode: 'click',
-	startActive: true,
+	startActive: false,
 	tipLabel: "Layers",
     target: 'top-right-container',
 	collapseLabel: '»',
 	collapseTipLabel: 'Close'
     });
 map.addControl(layerSwitcher);
-if (hasTouchScreen || isSmallScreen) {
-	document.addEventListener('DOMContentLoaded', function() {
-		setTimeout(function() {
-			layerSwitcher.hidePanel();
-		}, 500);
-	});	
+if (window.innerWidth <= 1200) {
+  layerSwitcher.hidePanel();
+}
+
+var fireStatusLegend = document.createElement('div');
+fireStatusLegend.className = 'fire-status-legend';
+fireStatusLegend.innerHTML = `
+  <div class="fire-legend-title">Status Kebakaran</div>
+  <div class="fire-legend-row"><span class="fire-legend-swatch fire-legend-danger"></span> Bahaya</div>
+  <div class="fire-legend-row"><span class="fire-legend-swatch fire-legend-medium"></span> Medium</div>
+  <div class="fire-legend-row"><span class="fire-legend-swatch fire-legend-safe"></span> Aman</div>
+`;
+if (topRightContainerDiv) {
+    topRightContainerDiv.appendChild(fireStatusLegend);
 }
 
 

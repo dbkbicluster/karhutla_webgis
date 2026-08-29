@@ -6,12 +6,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
         <meta name="mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.25.21/dist/css/uikit.min.css" />
         <link rel="stylesheet" href="./resources/ol.css">
         <link rel="stylesheet" href="resources/fontawesome-all.min.css">
         <link href="resources/photon-geocoder-autocomplete.min.css" rel="stylesheet">
         <link rel="stylesheet" href="./resources/ol-layerswitcher.css">
         <link rel="stylesheet" href="./resources/qgis2web.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.25.21/dist/css/uikit.min.css" />
         <link rel="stylesheet" href="./resources/style.css">
         <title>WebGIS DBK | Karhutla</title>
     </head>
@@ -69,14 +69,13 @@
 
         </nav>
         <!-- Konten WebGIS -->
-        <section class="uk-height-1-1">
-            <div id="map" class="uk-width-1-1 uk-container-expand uk-height-1-1">
+        <section class="uk-height-1-1 uk-width-1-1">
+            <div id="map">
                 <div id="popup" class="ol-popup">
                     <a href="#" id="popup-closer" class="ol-popup-closer"></a>
                     <div id="popup-content">
                     </div>
                 </div>
-            </div>
             <button id="fire-dashboard-toggle" class="fire-dashboard-toggle" type="button" aria-label="Buka dashboard">Open Dashboard</button>
             <aside id="fire-dashboard" class="fire-dashboard" aria-label="Dashboard monitoring kebakaran hutan">
                 <div class="fire-dashboard-header">
@@ -120,6 +119,8 @@
 
                 <div id="fire-incident-list" class="fire-incident-list"></div>
             </aside>
+            </div>
+
             <div id="mouse-coord" style="
                     position: absolute;
                     bottom: 10px;

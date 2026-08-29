@@ -33,6 +33,20 @@ html, body, #map {
     padding: 0;
     margin: 0;
 }
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+body {
+    min-height: 100vh;
+}
 /* === Modal Login Overlay === */
 #loginModal {
 position: fixed;
@@ -222,50 +236,68 @@ html, body, #map {
     .dbk-navbar {
         width: 100%;
         padding: 6px 8px;
+        gap: 6px;
+        min-height: 72px;
+        flex-wrap: wrap;
     }
 
-    /* Logo */
+    .dbk-brand,
+    .dbk-download {
+        flex: 0 0 auto;
+    }
 
     .dbk-brand .uk-logo {
         font-size: 16px;
+        line-height: 1;
+        padding: 0;
     }
 
     .dbk-brand img {
         width: 55px;
     }
 
-    /* Download */
-
     .dbk-download a {
         padding: 0 5px;
         font-size: 13px;
+        white-space: nowrap;
     }
-
-    /* Search menjadi 2 baris */
 
     .dbk-search {
         width: 100%;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
+        display: flex;
+        flex-wrap: wrap;
         gap: 6px;
+        margin-left: 0;
+        order: 3;
     }
 
-    .dbk-search input {
-        width: 100%;
-        min-width: 0;
-    }
-
-    .dbk-search button {
-        width: 100%;
-        min-width: 0;
-        font-size: 11px;
-        padding: 0 5px;
-    }
-
+    .dbk-search input,
+    .dbk-search button,
     .dbk-search select {
         width: 100%;
         min-width: 0;
-        grid-column: 1 / -1;
+        max-width: 100%;
+        box-sizing: border-box;
+        min-height: 38px;
+    }
+
+    .dbk-search input {
+        flex: 1 1 calc(50% - 3px);
+        font-size: 11px;
+        padding: 0 10px;
+    }
+
+    .dbk-search button {
+        flex: 1 1 calc(50% - 3px);
+        font-size: 11px;
+        padding: 0 8px;
+        line-height: 1.2;
+        white-space: normal;
+    }
+
+    .dbk-search select {
+        flex: 1 1 100%;
+        font-size: 12px;
     }
 }
 
@@ -274,14 +306,14 @@ html, body, #map {
    HP SANGAT KECIL
    ========================================================= */
 
-@media (max-width: 400px) {
+@media (max-width: 420px) {
 
     .dbk-brand .uk-logo span {
         display: none;
     }
 
     .dbk-brand img {
-        width: 50px;
+        width: 48px;
     }
 
     .dbk-download a {
@@ -289,13 +321,25 @@ html, body, #map {
     }
 
     .dbk-search {
-        grid-template-columns: 1fr;
+        display: flex;
+        flex-direction: column;
     }
 
     .dbk-search input,
     .dbk-search button,
     .dbk-search select {
-        grid-column: 1;
+        flex-basis: 100%;
+        width: 100%;
+    }
+
+    .dbk-search button {
+        font-size: 10.5px;
+        letter-spacing: 0.02em;
+    }
+
+    .login-box {
+        width: min(92vw, 300px);
+        padding: 20px 16px;
     }
 }
 

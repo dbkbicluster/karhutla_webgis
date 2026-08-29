@@ -140,6 +140,17 @@ body {
     overflow-y: auto;
 }
 
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+section.uk-height-1-1 {
+    position: relative;
+    height: calc(100vh - var(--dbk-nav-height) - var(--dbk-safe-top) - var(--dbk-safe-bottom));
+    min-height: 420px;
+}
+
 /* =========================================================
    DBK WEBGIS RESPONSIVE
    ========================================================= */
@@ -388,16 +399,25 @@ section.uk-height-1-1 {
 #map {
     position: relative;
     width: 100%;
+    height: 100%;
+    min-height: 320px;
     overflow: hidden;
+}
+
+#map .ol-viewport,
+#map .ol-layer,
+#map canvas {
+    width: 100% !important;
+    height: 100% !important;
 }
 
 .fire-dashboard {
     position: absolute;
-    top: 150px;
+    top: 16px;
     left: 16px;
     right: auto;
     width: min(320px, calc(100vw - 32px));
-    max-height: calc(100% - 180px);
+    max-height: calc(100% - 32px);
     background: rgba(15, 23, 42, 0.88);
     color: #f8fafc;
     border: 1px solid rgba(148, 163, 184, 0.35);

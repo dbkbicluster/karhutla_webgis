@@ -370,7 +370,14 @@ function initialiseForestFireDashboard() {
     });
   }
 
+  const refreshMapLayout = () => {
+    if (typeof map !== 'undefined' && typeof map.updateSize === 'function') {
+      map.updateSize();
+    }
+  };
+
   window.addEventListener('resize', () => {
+    refreshMapLayout();
     if (isMobile()) {
       dashboardOpen = false;
       forceLegendClosed();
@@ -380,6 +387,8 @@ function initialiseForestFireDashboard() {
     }
     updateDashboardView();
   });
+
+  window.addEventListener('orientationchange', refreshMapLayout);
 
   if (isMobile()) {
     dashboardOpen = false;

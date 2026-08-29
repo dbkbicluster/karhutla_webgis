@@ -300,9 +300,9 @@ function initialiseForestFireDashboard() {
   const closeBtn = document.getElementById('fire-dashboard-close');
   const toggleBtn = document.getElementById('fire-dashboard-toggle');
   const filterButtons = document.querySelectorAll('.fire-filter-btn');
-  const isMobile = () => window.innerWidth <= 700;
+  const isCompactLayout = () => window.innerWidth <= 700;
 
-  let dashboardOpen = !isMobile();
+  let dashboardOpen = true;
 
   function forceLegendClosed() {
     const legend = document.querySelector('.layer-switcher');
@@ -332,22 +332,11 @@ function initialiseForestFireDashboard() {
   function updateDashboardView() {
     if (!dashboard) return;
 
-    const mobile = isMobile();
     dashboard.classList.toggle('is-collapsed', !dashboardOpen);
-
-    if (mobile) {
-      if (toggleBtn) {
-        toggleBtn.textContent = 'Close Dashboard';
-        toggleBtn.style.display = 'inline-flex';
-      }
-      dashboardOpen = true;
-      forceLegendClosed();
-      return;
-    }
 
     if (toggleBtn) {
       toggleBtn.textContent = dashboardOpen ? 'Close Dashboard' : 'Open Dashboard';
-      toggleBtn.style.display = dashboardOpen ? 'none' : 'inline-flex';
+      toggleBtn.style.display = isCompactLayout() ? 'inline-flex' : (dashboardOpen ? 'none' : 'inline-flex');
     }
 
     if (dashboardOpen) {
@@ -383,18 +372,15 @@ function initialiseForestFireDashboard() {
   }
 
   window.addEventListener('resize', () => {
-    if (isMobile()) {
-      dashboardOpen = true;
+    if (window.innerWidth <= 1200) {
       forceLegendClosed();
+    } else {
+      restoreLegendForDesktop();
     }
     updateDashboardView();
   });
 
-  if (isMobile()) {
-    dashboardOpen = true;
-  }
-
-  if (typeof layerSwitcher !== 'undefined' && isMobile()) {
+  if (window.innerWidth <= 1200) {
     forceLegendClosed();
   }
 

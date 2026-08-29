@@ -7,23 +7,9 @@ var map = new ol.Map({
         constrainResolution: true,
         maxZoom: 28,
         minZoom: 1,
+        
     })
 });
-
-function refreshMapSize() {
-    if (map && typeof map.updateSize === 'function') {
-        setTimeout(function () {
-            map.updateSize();
-        }, 50);
-    }
-}
-
-window.addEventListener('load', refreshMapSize);
-window.addEventListener('resize', refreshMapSize);
-window.addEventListener('orientationchange', refreshMapSize);
-
-setTimeout(refreshMapSize, 200);
-setTimeout(refreshMapSize, 600);
 
 // Define AOI Extents
 const aoiExtents = {

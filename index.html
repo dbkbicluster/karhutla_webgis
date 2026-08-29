@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="./resources/ol-layerswitcher.css">
         <link rel="stylesheet" href="./resources/qgis2web.css">
         <link rel="stylesheet" href="./resources/style.css">
-        <title>WebGIS DBK 202608</title>
+        <title>WebGIS DBK | Karhutla</title>
     </head>
     <body>
         <nav class="uk-background-primary uk-navbar dbk-navbar" uk-navbar>
@@ -77,6 +77,46 @@
                     </div>
                 </div>
             </div>
+            <aside id="fire-dashboard" class="fire-dashboard" aria-label="Dashboard monitoring kebakaran hutan">
+                <div class="fire-dashboard-header">
+                    <div>
+                        <span class="fire-dashboard-kicker">Monitoring</span>
+                        <h3>Kebakaran Hutan</h3>
+                    </div>
+                    <button id="fire-dashboard-close" type="button" aria-label="Tutup dashboard">×</button>
+                </div>
+
+                <div class="fire-dashboard-stats">
+                    <div class="fire-stat fire-stat--total">
+                        <span id="fire-total">0</span>
+                        <small>Total Titik</small>
+                    </div>
+                    <div class="fire-stat fire-stat--active">
+                        <span id="fire-active">0</span>
+                        <small>Aktif</small>
+                    </div>
+                    <div class="fire-stat fire-stat--done">
+                        <span id="fire-done">0</span>
+                        <small>Padam</small>
+                    </div>
+                    <div class="fire-stat fire-stat--area">
+                        <span id="fire-area-total">0</span>
+                        <small>Ha Terpantau</small>
+                    </div>
+                </div>
+
+                <div class="fire-dashboard-filter">
+                    <button type="button" class="fire-filter-btn is-active" data-status="all">Semua</button>
+                    <button type="button" class="fire-filter-btn" data-status="Aktif">Aktif</button>
+                    <button type="button" class="fire-filter-btn" data-status="Sudah Padam">Padam</button>
+                </div>
+
+                <div class="fire-dashboard-meta">
+                    <span>Update: 28 Agustus 2026</span>
+                </div>
+
+                <div id="fire-incident-list" class="fire-incident-list"></div>
+            </aside>
             <div id="mouse-coord" style="
                     position: absolute;
                     bottom: 10px;

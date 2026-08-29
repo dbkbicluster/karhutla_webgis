@@ -113,3 +113,133 @@ map.on('pointermove', function (evt) {
   document.getElementById('mouse-coord').innerHTML =
     `Koordinat: ${lat}, ${lon}`;
 });
+
+const fireDashboardState = {
+  status: 'all'
+};
+
+function parseForestFireArea(value) {
+  if (value === null || value === undefined || value === '') {
+    return 0;
+  }
+
+  if (typeof value === 'number' && Number.isFinite(value)) {
+    return value;
+  }
+
+  const cleaned = String(value).replace(/[^0-9,.-]/g, '').replace(',', '.');
+  const numericValue = parseFloat(cleaned);
+  return Number.isFinite(numericValue) ? numericValue : 0;
+}
+
+function getForestFireIncidents() {
+  const featureCollection = window.json_koordinat_kebakaran_hutan_20260828_30;
+  if (!featureCollection || !Array.isArray(featureCollection.features)) {
+    return [];
+  }
+
+  return featureCollection.features.map((feature, index) => {
+    const props = feature.properties || {};
+    const geometry = feature.geometry || {};
+    const coordinates = Array.isArray(geometry.coordinates) ? geometry.coordinates : [null, null];
+    const latitude = props.Latitude !== null && props.Latitude !== undefined && props.Latitude !== ''
+      ? Number(props.Latitude)
+      : Number(coordinates[1]);
+    const longitude = props.Longitude !== null && props.Longitude !== undefined && props.Longitude !== ''
+      ? Number(props.Longitude)
+      : Number(coordinates[0]);
+
+    return {
+      id: props.Titik || index + 1,
+      lokasi: props.Lokasi || 'Lokasi tidak tercatat',
+      status: props.Status || 'Belum tersedia',
+      luas: parseForestFireArea(props['Luas Terda']),
+      vegetasi: props.Vegetasi || '-',
+      latitude: Number.isFinite(latitude) ? latitude : null,
+      longitude: Number.isFinite(longitude) ? longitude : null,
+    };
+  });
+}
+
+function renderForestFireDashboard() {
+  const incidents = getForestFireIncidents();
+  const total = incidents.length;
+  const active = incidents.filter((item) => String(item.status).toLowerCase().includes('aktif')).length;
+  const done = incidents.filter((item) => String(item.status).toLowerCase().includes('padam')).length;
+  const totalArea = incidents.reduce((sum, item) => sum + item.luas, 0);
+
+  const totalEl = document.getElementById('fire-total');
+  const activeEl = document.getElementById('fire-active');
+  const doneEl = document.getElementById('fire-done');
+  const areaEl = document.getElementById('fire-area-total');
+  const listEl = document.getElementById('fire-incident-list');
+
+  if (totalEl) totalEl.textContent = total;
+  if (activeEl) activeEl.textContent = active;
+  if (doneEl) doneEl.textContent = done;
+  if (areaEl) areaEl.textContent = totalArea.toLocaleString('id-ID', { maximumFractionDigits: 0 });
+
+  const filteredIncidents = fireDashboardState.status === 'all'
+    ? incidents
+    : incidents.filter((item) => String(item.status).toLowerCase() === String(fireDashboardState.status).toLowerCase());
+
+  if (!listEl) return;
+
+  if (!filteredIncidents.length) {
+    listEl.innerHTML = '<div class="fire-empty">Tidak ada data untuk filter ini.</div>';
+    return;
+  }
+
+  listEl.innerHTML = filteredIncidents.map((item) => {
+    const statusClass = String(item.status).toLowerCase().includes('aktif') ? 'is-active' : 'is-done';
+    const coordinateText = item.latitude !== null && item.longitude !== null
+      ? `${item.latitude.toFixed(5)}, ${item.longitude.toFixed(5)}`
+      : 'Koordinat tidak tersedia';
+
+    return `
+      <button class="fire-incident-item" type="button" data-lat="${item.latitude ?? ''}" data-lon="${item.longitude ?? ''}">
+        <div>
+          <strong>${item.lokasi}</strong>
+          <small>${coordinateText}</small>
+          <small>Luas: ${item.luas.toLocaleString('id-ID', { maximumFractionDigits: 0 })} Ha</small>
+        </div>
+        <span class="fire-incident-badge ${statusClass}">${item.status}</span>
+      </button>
+    `;
+  }).join('');
+
+  listEl.querySelectorAll('.fire-incident-item').forEach((button) => {
+    button.addEventListener('click', () => {
+      const lat = Number(button.dataset.lat);
+      const lon = Number(button.dataset.lon);
+      if (Number.isFinite(lat) && Number.isFinite(lon)) {
+        const target = ol.proj.fromLonLat([lon, lat]);
+        map.getView().animate({ center: target, zoom: 14, duration: 800 });
+      }
+    });
+  });
+}
+
+function initialiseForestFireDashboard() {
+  const dashboard = document.getElementById('fire-dashboard');
+  const closeBtn = document.getElementById('fire-dashboard-close');
+  const filterButtons = document.querySelectorAll('.fire-filter-btn');
+
+  filterButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      fireDashboardState.status = button.dataset.status;
+      filterButtons.forEach((item) => item.classList.toggle('is-active', item === button));
+      renderForestFireDashboard();
+    });
+  });
+
+  if (closeBtn && dashboard) {
+    closeBtn.addEventListener('click', () => {
+      dashboard.classList.toggle('is-collapsed');
+    });
+  }
+
+  renderForestFireDashboard();
+}
+
+document.addEventListener('DOMContentLoaded', initialiseForestFireDashboard);

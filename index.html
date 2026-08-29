@@ -16,35 +16,57 @@
         <title>WebGIS DBK 202608</title>
     </head>
     <body>
-        <nav class="uk-background-primary  uk-navbar" uk-navbar>
-            <div class="uk-navbar-left">              
-                <a class="uk-navbar-item uk-logo" href="/"><img width="75" height="auto" src="images/dbk_logo_transparent.png"/>WebGIS</a>
-                <ul class="uk-navbar-nav">
-                <li>
-                    <input id="coordInput" class="uk-input" style="width:180px;" type="text" placeholder="Lat, Lon">
-                </li>
-                <li>
-                    <button class="uk-button uk-button-default" onclick="searchCoordinate()">Cari by Kordinat</button>
-                </li>
-                </ul>
+        <nav class="uk-background-primary uk-navbar dbk-navbar" uk-navbar>
+            <!-- BARIS KIRI -->
+            <div class="uk-navbar-left dbk-brand">
+                <a class="uk-navbar-item uk-logo" href="/">
+                    <img src="images/dbk_logo_transparent.png" alt="DBK">
+                    <span>WebGIS</span>
+                </a>
             </div>
-            <div class="uk-navbar-right">
-                
-                <ul class="uk-navbar-nav">
-                    <a class="uk-navbar-item" href="#modal-download" uk-toggle>Download Data</a>
-                </ul>
-                <ul class="uk-navbar-nav">
-                    <li>
-                        <select class="uk-select" id="aoiDropdown" onchange="zoomToAOI()">
-                            <option value="" disabled selected>Pilih AOI</option>
-                            <option value="area1">Camp B Joloi</option>
-                            <option value="area2">Ampar</option>
-                            <option value="area3">Muara Laung</option>
-                            <option value="area4">PIT DBK</option>
-                        </select>
-                    </li>
-                </ul>
+
+            <!-- DOWNLOAD -->
+            <div class="uk-navbar-right dbk-download">
+                <a class="uk-navbar-item"
+                href="#modal-download"
+                uk-toggle>
+                    Download Data
+                </a>
             </div>
+
+            <!-- SEARCH -->
+            <div class="dbk-search">
+
+                <input
+                    id="coordInput"
+                    class="uk-input"
+                    type="text"
+                    placeholder="Lat, Lon">
+
+                <button
+                    class="uk-button uk-button-default"
+                    onclick="searchCoordinate()">
+                    CARI BY KOORDINAT
+                </button>
+
+                <select
+                    class="uk-select"
+                    id="aoiDropdown"
+                    onchange="zoomToAOI()">
+
+                    <option value="" disabled selected>
+                        Pilih AOI
+                    </option>
+
+                    <option value="area1">Segment A</option>
+                    <option value="area2">Segment B</option>
+                    <option value="area3">Segment C</option>
+                    <option value="area4">PIT DBK</option>
+
+                </select>
+
+            </div>
+
         </nav>
         <!-- Konten WebGIS -->
         <section class="uk-height-1-1">

@@ -99,3 +99,363 @@ html, body, #map {
     padding: 0;
     margin: 0;
 }
+
+/* =========================================================
+   DBK WEBGIS RESPONSIVE
+   ========================================================= */
+
+/* ---------- NAVBAR ---------- */
+
+.dbk-navbar {
+    position: relative;
+    min-height: 64px;
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    z-index: 2000;
+}
+
+/* Logo */
+
+.dbk-brand {
+    flex-shrink: 0;
+}
+
+.dbk-brand .uk-logo {
+    padding: 0 10px 0 0;
+    font-size: 18px;
+    white-space: nowrap;
+}
+
+.dbk-brand img {
+    width: 75px;
+    height: auto;
+    margin-right: 5px;
+}
+
+/* Download */
+
+.dbk-download {
+    margin-left: auto;
+    flex-shrink: 0;
+}
+
+.dbk-download a {
+    white-space: nowrap;
+}
+
+/* Search */
+
+.dbk-search {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: 20px;
+    order: 2;
+}
+
+.dbk-search input {
+    width: 180px;
+    box-sizing: border-box;
+}
+
+.dbk-search button {
+    min-height: 40px;
+    white-space: nowrap;
+}
+
+.dbk-search select {
+    width: 130px;
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .dbk-navbar {
+        flex-wrap: wrap;
+        min-height: auto;
+        padding: 8px 10px;
+    }
+
+    .dbk-brand {
+        order: 1;
+    }
+
+    .dbk-download {
+        order: 1;
+        margin-left: auto;
+    }
+
+    .dbk-search {
+        order: 2;
+        width: 100%;
+        margin: 8px 0 0 0;
+    }
+
+    .dbk-search input {
+        flex: 1;
+        width: auto;
+    }
+
+    .dbk-search button {
+        flex: 0 0 auto;
+    }
+
+    .dbk-search select {
+        flex: 0 0 130px;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .dbk-navbar {
+        width: 100%;
+        padding: 6px 8px;
+    }
+
+    /* Logo */
+
+    .dbk-brand .uk-logo {
+        font-size: 16px;
+    }
+
+    .dbk-brand img {
+        width: 55px;
+    }
+
+    /* Download */
+
+    .dbk-download a {
+        padding: 0 5px;
+        font-size: 13px;
+    }
+
+    /* Search menjadi 2 baris */
+
+    .dbk-search {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 6px;
+    }
+
+    .dbk-search input {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .dbk-search button {
+        width: 100%;
+        min-width: 0;
+        font-size: 11px;
+        padding: 0 5px;
+    }
+
+    .dbk-search select {
+        width: 100%;
+        min-width: 0;
+        grid-column: 1 / -1;
+    }
+}
+
+
+/* =========================================================
+   HP SANGAT KECIL
+   ========================================================= */
+
+@media (max-width: 400px) {
+
+    .dbk-brand .uk-logo span {
+        display: none;
+    }
+
+    .dbk-brand img {
+        width: 50px;
+    }
+
+    .dbk-download a {
+        font-size: 12px;
+    }
+
+    .dbk-search {
+        grid-template-columns: 1fr;
+    }
+
+    .dbk-search input,
+    .dbk-search button,
+    .dbk-search select {
+        grid-column: 1;
+    }
+}
+
+
+/* =========================================================
+   MAP
+   ========================================================= */
+
+#map {
+    width: 100%;
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   QGIS2WEB LAYER SWITCHER
+   ========================================================= */
+
+/* Desktop */
+
+.layer-switcher .panel {
+    max-width: 440px;
+    box-sizing: border-box;
+}
+
+
+/* Tablet */
+
+@media (max-width: 600px) {
+
+    .layer-switcher .panel {
+        width: calc(100vw - 20px) !important;
+        max-width: calc(100vw - 20px) !important;
+
+        box-sizing: border-box;
+        overflow-x: hidden;
+    }
+
+    .layer-switcher .panel ul {
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .layer-switcher .panel li {
+        max-width: 100%;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+    }
+
+}
+
+
+/* HP kecil */
+
+@media (max-width: 400px) {
+
+    .layer-switcher .panel {
+        width: calc(100vw - 10px) !important;
+        max-width: calc(100vw - 10px) !important;
+    }
+
+}
+
+
+/* =========================================================
+   POPUP
+   ========================================================= */
+
+.ol-popup {
+    max-width: 90vw;
+}
+
+@media (max-width: 600px) {
+
+    .ol-popup {
+        max-width: calc(100vw - 30px);
+    }
+
+    .ol-popup table {
+        max-width: 100%;
+        display: block;
+        overflow-x: auto;
+    }
+
+}
+
+
+/* =========================================================
+   KOORDINAT
+   ========================================================= */
+
+#mouse-coord {
+    max-width: calc(100vw - 20px);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+/* =========================================
+   POPUP - TUMBUH DARI ATAS KE BAWAH
+   ========================================= */
+
+.ol-popup {
+    bottom: auto !important;
+    top: 12px !important;
+    
+    left: -50px !important;
+    
+    max-width: 90vw;
+    max-height: 75vh;
+    
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+
+/* Isi popup */
+#popup-content {
+    max-width: 100%;
+    max-height: 65vh;
+    
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+
+/* Gambar */
+#popup-content img {
+    max-width: 100% !important;
+    width: auto !important;
+    height: auto !important;
+}
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 600px) {
+
+    .ol-popup {
+        top: 15px !important;
+        bottom: auto !important;
+
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+
+        width: calc(100vw - 30px) !important;
+        max-width: calc(100vw - 30px) !important;
+
+        max-height: 75vh;
+    }
+
+    #popup-content {
+        max-height: 65vh;
+    }
+
+    #popup-content img {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+    }
+}

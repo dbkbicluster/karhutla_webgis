@@ -331,15 +331,15 @@ function initialiseForestFireDashboard() {
     if (!dashboard) return;
 
     const mobile = isMobile();
+    dashboard.classList.toggle('is-collapsed', !dashboardOpen);
+
     if (mobile) {
-      dashboard.classList.toggle('is-collapsed', !dashboardOpen);
       if (toggleBtn) {
         toggleBtn.textContent = dashboardOpen ? 'Close Dashboard' : 'Open Dashboard';
         toggleBtn.style.display = 'inline-flex';
       }
       forceLegendClosed();
     } else {
-      dashboard.classList.remove('is-collapsed');
       dashboardOpen = true;
       if (toggleBtn) {
         toggleBtn.style.display = 'none';
@@ -358,21 +358,15 @@ function initialiseForestFireDashboard() {
 
   if (closeBtn && dashboard) {
     closeBtn.addEventListener('click', () => {
-      if (isMobile()) {
-        dashboardOpen = false;
-      } else {
-        dashboard.classList.toggle('is-collapsed');
-      }
+      dashboardOpen = false;
       updateDashboardView();
     });
   }
 
   if (toggleBtn) {
     toggleBtn.addEventListener('click', () => {
-      if (isMobile()) {
-        dashboardOpen = !dashboardOpen;
-        updateDashboardView();
-      }
+      dashboardOpen = !dashboardOpen;
+      updateDashboardView();
     });
   }
 

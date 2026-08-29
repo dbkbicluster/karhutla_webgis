@@ -310,7 +310,7 @@ function initialiseForestFireDashboard() {
       legend.classList.remove('shown');
       legend.style.display = 'none';
     }
-    if (typeof layerSwitcher !== 'undefined') {
+    if (typeof layerSwitcher !== 'undefined' && window.innerWidth > 1200) {
       layerSwitcher.hidePanel();
       layerSwitcher.element.style.display = 'none';
     }
@@ -319,11 +319,13 @@ function initialiseForestFireDashboard() {
   function restoreLegendForDesktop() {
     const legend = document.querySelector('.layer-switcher');
     if (legend) {
-      legend.style.display = '';
+      legend.style.display = window.innerWidth <= 1200 ? 'none' : '';
     }
     if (typeof layerSwitcher !== 'undefined') {
-      layerSwitcher.element.style.display = '';
-      layerSwitcher.showPanel();
+      layerSwitcher.element.style.display = window.innerWidth <= 1200 ? 'none' : '';
+      if (window.innerWidth > 1200) {
+        layerSwitcher.showPanel();
+      }
     }
   }
 

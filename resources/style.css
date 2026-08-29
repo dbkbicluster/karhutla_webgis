@@ -726,6 +726,12 @@ section.uk-height-1-1 {
     background: #22c55e;
 }
 
+@media (max-width: 1200px) {
+    .layer-switcher {
+        display: none !important;
+    }
+}
+
 @media (max-width: 900px) {
     .fire-dashboard-toggle {
         display: inline-flex;

@@ -1074,9 +1074,20 @@ var layerSwitcher = new ol.control.LayerSwitcher({
 	collapseTipLabel: 'Close'
     });
 map.addControl(layerSwitcher);
-if (window.innerWidth <= 1200) {
-  layerSwitcher.hidePanel();
+
+function syncLayerSwitcherVisibility() {
+  if (!layerSwitcher || !layerSwitcher.element) return;
+
+  if (window.innerWidth <= 1200) {
+    layerSwitcher.hidePanel();
+    layerSwitcher.element.style.display = 'none';
+  } else {
+    layerSwitcher.element.style.display = '';
+  }
 }
+
+syncLayerSwitcherVisibility();
+window.addEventListener('resize', syncLayerSwitcherVisibility);
 
 var fireStatusLegend = document.createElement('div');
 fireStatusLegend.className = 'fire-status-legend';

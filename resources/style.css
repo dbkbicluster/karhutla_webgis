@@ -316,11 +316,11 @@ section.uk-height-1-1 {
 
 .fire-dashboard {
     position: absolute;
-    top: 92px;
+    top: 150px;
     left: 16px;
     right: auto;
     width: min(320px, calc(100vw - 32px));
-    max-height: calc(100% - 110px);
+    max-height: calc(100% - 180px);
     background: rgba(15, 23, 42, 0.88);
     color: #f8fafc;
     border: 1px solid rgba(148, 163, 184, 0.35);
@@ -333,7 +333,7 @@ section.uk-height-1-1 {
 
 .fire-dashboard-toggle {
     position: absolute;
-    top: 92px;
+    top: 150px;
     left: 16px;
     display: none;
     z-index: 1001;
@@ -453,6 +453,75 @@ section.uk-height-1-1 {
     opacity: 0.8;
 }
 
+.fire-chart {
+    margin: 0 16px 12px;
+    background: rgba(15, 23, 42, 0.4);
+    border: 1px solid rgba(148, 163, 184, 0.18);
+    border-radius: 12px;
+    padding: 10px 12px 8px;
+}
+
+.fire-chart-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    color: #e2e8f0;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.fire-chart-bars {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 10px;
+    min-height: 118px;
+    height: 118px;
+}
+
+.fire-chart-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: #cbd5e1;
+}
+
+.fire-chart-bar {
+    display: flex;
+    align-items: end;
+    width: 100%;
+    max-width: 42px;
+    height: 82px;
+    padding: 0 2px;
+    background: rgba(148, 163, 184, 0.08);
+    border-radius: 8px 8px 4px 4px;
+    overflow: hidden;
+}
+
+.fire-chart-bar > span {
+    display: block;
+    width: 100%;
+    border-radius: 8px 8px 4px 4px;
+    min-height: 8px;
+    transition: height 0.2s ease;
+}
+
+.fire-chart-item strong {
+    font-size: 12px;
+    color: #f8fafc;
+    line-height: 1;
+}
+
+.fire-chart-item small {
+    font-size: 10px;
+    opacity: 0.8;
+    text-transform: uppercase;
+}
+
 .fire-incident-list {
     padding: 0 16px 14px;
     max-height: 360px;
@@ -541,6 +610,7 @@ section.uk-height-1-1 {
 .fire-dashboard.is-collapsed .fire-dashboard-stats,
 .fire-dashboard.is-collapsed .fire-dashboard-filter,
 .fire-dashboard.is-collapsed .fire-dashboard-meta,
+.fire-dashboard.is-collapsed .fire-chart,
 .fire-dashboard.is-collapsed .fire-incident-list {
     display: none;
 }
@@ -551,13 +621,13 @@ section.uk-height-1-1 {
 
 @media (max-width: 900px) {
     .fire-dashboard {
-        top: 74px;
+        top: 120px;
         bottom: auto;
         left: 10px;
         right: 10px;
         width: auto;
         max-width: calc(100vw - 20px);
-        max-height: calc(100vh - 120px);
+        max-height: calc(100vh - 150px);
         min-height: 300px;
         z-index: 900;
     }
@@ -603,11 +673,11 @@ section.uk-height-1-1 {
     }
 
     .fire-dashboard {
-        top: 82px;
+        top: 132px;
         right: 12px;
         left: 12px;
         width: auto;
-        max-height: calc(100vh - 110px);
+        max-height: calc(100vh - 170px);
         min-height: 260px;
     }
 

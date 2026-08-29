@@ -201,6 +201,36 @@ function getForestFireIncidents() {
   });
 }
 
+function renderFireChart(incidents) {
+  const chartEl = document.getElementById('fire-chart');
+  if (!chartEl) return;
+
+  const active = incidents.filter((item) => String(item.status).toLowerCase().includes('aktif')).length;
+  const done = incidents.filter((item) => String(item.status).toLowerCase().includes('padam')).length;
+  const entries = [
+    { label: 'Aktif', value: active, color: '#fbbf24' },
+    { label: 'Padam', value: done, color: '#86efac' },
+    { label: 'Total', value: incidents.length, color: '#93c5fd' }
+  ];
+  const maxValue = Math.max(...entries.map((entry) => entry.value), 1);
+
+  chartEl.innerHTML = `
+    <div class="fire-chart-title">
+      <span>Distribusi</span>
+      <strong>${incidents.length} titik</strong>
+    </div>
+    <div class="fire-chart-bars">
+      ${entries.map((entry) => `
+        <div class="fire-chart-item">
+          <div class="fire-chart-bar"><span style="height:${Math.max(10, (entry.value / maxValue) * 100)}%; background:${entry.color};"></span></div>
+          <strong>${entry.value}</strong>
+          <small>${entry.label}</small>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
 function renderForestFireDashboard() {
   const incidents = getForestFireIncidents();
   const total = incidents.length;
@@ -218,6 +248,8 @@ function renderForestFireDashboard() {
   if (activeEl) activeEl.textContent = active;
   if (doneEl) doneEl.textContent = done;
   if (areaEl) areaEl.textContent = totalArea.toLocaleString('id-ID', { maximumFractionDigits: 0 });
+
+  renderFireChart(incidents);
 
   const filteredIncidents = fireDashboardState.status === 'all'
     ? incidents

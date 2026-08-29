@@ -115,8 +115,48 @@ map.on('pointermove', function (evt) {
 });
 
 const fireDashboardState = {
-  status: 'all'
+  status: 'all',
+  selectedId: null
 };
+
+const fireSelectionLayer = new ol.layer.Vector({
+  source: new ol.source.Vector(),
+  style: new ol.style.Style({
+    image: new ol.style.Circle({
+      radius: 12,
+      fill: new ol.style.Fill({ color: 'rgba(249, 115, 22, 0.24)' }),
+      stroke: new ol.style.Stroke({ color: '#f97316', width: 3 })
+    })
+  }),
+  zIndex: 400
+});
+map.addLayer(fireSelectionLayer);
+
+function clearSelectedFireMarker() {
+  fireSelectionLayer.getSource().clear();
+  fireDashboardState.selectedId = null;
+  document.querySelectorAll('.fire-incident-item').forEach((button) => {
+    button.classList.remove('is-selected');
+  });
+}
+
+function setSelectedFireMarker(lat, lon, itemId) {
+  if (!Number.isFinite(lat) || !Number.isFinite(lon)) {
+    clearSelectedFireMarker();
+    return;
+  }
+
+  fireSelectionLayer.getSource().clear();
+  const feature = new ol.Feature({
+    geometry: new ol.geom.Point(ol.proj.fromLonLat([lon, lat]))
+  });
+  fireSelectionLayer.getSource().addFeature(feature);
+  fireDashboardState.selectedId = itemId;
+
+  document.querySelectorAll('.fire-incident-item').forEach((button) => {
+    button.classList.toggle('is-selected', String(button.dataset.id) === String(itemId));
+  });
+}
 
 function parseForestFireArea(value) {
   if (value === null || value === undefined || value === '') {
@@ -195,9 +235,10 @@ function renderForestFireDashboard() {
     const coordinateText = item.latitude !== null && item.longitude !== null
       ? `${item.latitude.toFixed(5)}, ${item.longitude.toFixed(5)}`
       : 'Koordinat tidak tersedia';
+    const selectedClass = String(fireDashboardState.selectedId) === String(item.id) ? 'is-selected' : '';
 
     return `
-      <button class="fire-incident-item" type="button" data-lat="${item.latitude ?? ''}" data-lon="${item.longitude ?? ''}">
+      <button class="fire-incident-item ${selectedClass}" type="button" data-id="${item.id}" data-lat="${item.latitude ?? ''}" data-lon="${item.longitude ?? ''}">
         <div>
           <strong>${item.lokasi}</strong>
           <small>${coordinateText}</small>
@@ -210,9 +251,11 @@ function renderForestFireDashboard() {
 
   listEl.querySelectorAll('.fire-incident-item').forEach((button) => {
     button.addEventListener('click', () => {
+      const itemId = button.dataset.id;
       const lat = Number(button.dataset.lat);
       const lon = Number(button.dataset.lon);
       if (Number.isFinite(lat) && Number.isFinite(lon)) {
+        setSelectedFireMarker(lat, lon, itemId);
         const target = ol.proj.fromLonLat([lon, lat]);
         map.getView().animate({ center: target, zoom: 14, duration: 800 });
       }

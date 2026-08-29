@@ -475,6 +475,13 @@ section.uk-height-1-1 {
     padding: 10px 12px;
     cursor: pointer;
     text-align: left;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.fire-incident-item.is-selected {
+    border-color: rgba(249, 115, 22, 0.9);
+    box-shadow: 0 0 0 2px rgba(249, 115, 22, 0.2);
+    background: rgba(30, 41, 59, 0.9);
 }
 
 .fire-incident-item strong,

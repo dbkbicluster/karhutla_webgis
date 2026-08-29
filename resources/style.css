@@ -56,6 +56,8 @@ body {
     min-height: 100vh;
     min-height: 100dvh;
     min-height: 100svh;
+    display: flex;
+    flex-direction: column;
     padding-top: var(--dbk-safe-top);
     padding-bottom: var(--dbk-safe-bottom);
     padding-left: var(--dbk-safe-left);
@@ -63,8 +65,10 @@ body {
 }
 
 section.uk-height-1-1 {
-    height: calc(100dvh - var(--dbk-nav-height) - var(--dbk-safe-top) - var(--dbk-safe-bottom));
-    min-height: calc(100dvh - var(--dbk-nav-height) - var(--dbk-safe-top) - var(--dbk-safe-bottom));
+    flex: 1 1 auto;
+    min-height: 0;
+    height: calc(100vh - var(--dbk-nav-height) - var(--dbk-safe-top) - var(--dbk-safe-bottom));
+    min-height: calc(100vh - var(--dbk-nav-height) - var(--dbk-safe-top) - var(--dbk-safe-bottom));
 }
 /* === Modal Login Overlay === */
 #loginModal {
@@ -402,6 +406,7 @@ section.uk-height-1-1 {
     height: 100%;
     min-height: 320px;
     overflow: hidden;
+    flex: 1 1 auto;
 }
 
 #map .ol-viewport,
@@ -409,6 +414,8 @@ section.uk-height-1-1 {
 #map canvas {
     width: 100% !important;
     height: 100% !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
 }
 
 .fire-dashboard {

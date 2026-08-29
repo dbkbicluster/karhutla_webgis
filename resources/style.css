@@ -304,25 +304,50 @@ html, body, #map {
    MAP
    ========================================================= */
 
+section.uk-height-1-1 {
+    position: relative;
+}
+
 #map {
+    position: relative;
     width: 100%;
     overflow: hidden;
 }
 
 .fire-dashboard {
     position: absolute;
-    top: 96px;
-    right: 16px;
-    width: min(340px, calc(100vw - 24px));
+    top: 92px;
+    left: 16px;
+    right: auto;
+    width: min(320px, calc(100vw - 32px));
     max-height: calc(100% - 110px);
     background: rgba(15, 23, 42, 0.88);
     color: #f8fafc;
     border: 1px solid rgba(148, 163, 184, 0.35);
     border-radius: 14px;
     box-shadow: 0 16px 40px rgba(15, 23, 42, 0.28);
-    z-index: 1000;
+    z-index: 900;
     overflow: hidden;
     backdrop-filter: blur(8px);
+}
+
+.fire-dashboard-toggle {
+    position: absolute;
+    top: 92px;
+    left: 16px;
+    display: none;
+    z-index: 1001;
+    border: 1px solid rgba(249, 115, 22, 0.65);
+    background: rgba(249, 115, 22, 0.95);
+    color: #fff;
+    border-radius: 999px;
+    padding: 8px 14px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0 12px 28px rgba(249, 115, 22, 0.28);
 }
 
 .fire-dashboard-header {
@@ -519,15 +544,92 @@ html, body, #map {
 
 @media (max-width: 900px) {
     .fire-dashboard {
-        top: auto;
-        bottom: 18px;
-        left: 12px;
-        right: 12px;
+        top: 74px;
+        bottom: auto;
+        left: 10px;
+        right: 10px;
         width: auto;
-        max-height: 42vh;
+        max-width: calc(100vw - 20px);
+        max-height: calc(100vh - 120px);
+        min-height: 300px;
+        z-index: 900;
+    }
+
+    .fire-dashboard-header h3 {
+        font-size: 18px;
+    }
+
+    .fire-dashboard-stats {
+        gap: 8px;
+        padding-top: 12px;
+    }
+
+    .fire-stat {
+        padding: 10px 10px;
+    }
+
+    .fire-stat span {
+        font-size: clamp(22px, 4vw, 30px);
+    }
+
+    .fire-incident-list {
+        max-height: calc(100vh - 295px);
+        min-height: 180px;
+    }
+
+    .fire-incident-item {
+        padding: 12px 10px;
+    }
+
+    .fire-incident-item strong {
+        font-size: 14px;
+    }
+
+    .fire-incident-item small {
+        font-size: 12px;
     }
 }
 
+@media (max-width: 700px) {
+    .fire-dashboard-toggle {
+        display: inline-flex;
+    }
+
+    .fire-dashboard {
+        top: 82px;
+        right: 12px;
+        left: 12px;
+        width: auto;
+        max-height: calc(100vh - 110px);
+        min-height: 260px;
+    }
+
+    .fire-dashboard.is-collapsed {
+        display: none;
+    }
+
+    .fire-incident-list {
+        max-height: calc(100vh - 280px);
+    }
+
+    .layer-switcher {
+        display: none !important;
+    }
+}
+
+.ol-control {
+    z-index: 100;
+}
+
+.layer-switcher {
+    z-index: 1200;
+    right: 12px;
+    top: 72px;
+}
+
+.layer-switcher .panel {
+    max-width: 270px;
+}
 
 /* =========================================================
    QGIS2WEB LAYER SWITCHER

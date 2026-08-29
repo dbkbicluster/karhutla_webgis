@@ -223,7 +223,55 @@ function renderForestFireDashboard() {
 function initialiseForestFireDashboard() {
   const dashboard = document.getElementById('fire-dashboard');
   const closeBtn = document.getElementById('fire-dashboard-close');
+  const toggleBtn = document.getElementById('fire-dashboard-toggle');
   const filterButtons = document.querySelectorAll('.fire-filter-btn');
+  const isMobile = () => window.innerWidth <= 700;
+
+  let dashboardOpen = !isMobile();
+
+  function forceLegendClosed() {
+    const legend = document.querySelector('.layer-switcher');
+    if (legend) {
+      legend.classList.remove('shown');
+      legend.style.display = 'none';
+    }
+    if (typeof layerSwitcher !== 'undefined') {
+      layerSwitcher.hidePanel();
+      layerSwitcher.element.style.display = 'none';
+    }
+  }
+
+  function restoreLegendForDesktop() {
+    const legend = document.querySelector('.layer-switcher');
+    if (legend) {
+      legend.style.display = '';
+    }
+    if (typeof layerSwitcher !== 'undefined') {
+      layerSwitcher.element.style.display = '';
+      layerSwitcher.showPanel();
+    }
+  }
+
+  function updateDashboardView() {
+    if (!dashboard) return;
+
+    const mobile = isMobile();
+    if (mobile) {
+      dashboard.classList.toggle('is-collapsed', !dashboardOpen);
+      if (toggleBtn) {
+        toggleBtn.textContent = dashboardOpen ? 'Close Dashboard' : 'Open Dashboard';
+        toggleBtn.style.display = 'inline-flex';
+      }
+      forceLegendClosed();
+    } else {
+      dashboard.classList.remove('is-collapsed');
+      dashboardOpen = true;
+      if (toggleBtn) {
+        toggleBtn.style.display = 'none';
+      }
+      restoreLegendForDesktop();
+    }
+  }
 
   filterButtons.forEach((button) => {
     button.addEventListener('click', () => {
@@ -235,10 +283,44 @@ function initialiseForestFireDashboard() {
 
   if (closeBtn && dashboard) {
     closeBtn.addEventListener('click', () => {
-      dashboard.classList.toggle('is-collapsed');
+      if (isMobile()) {
+        dashboardOpen = false;
+      } else {
+        dashboard.classList.toggle('is-collapsed');
+      }
+      updateDashboardView();
     });
   }
 
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', () => {
+      if (isMobile()) {
+        dashboardOpen = !dashboardOpen;
+        updateDashboardView();
+      }
+    });
+  }
+
+  window.addEventListener('resize', () => {
+    if (isMobile()) {
+      dashboardOpen = false;
+      forceLegendClosed();
+    } else {
+      dashboardOpen = true;
+      restoreLegendForDesktop();
+    }
+    updateDashboardView();
+  });
+
+  if (isMobile()) {
+    dashboardOpen = false;
+  }
+
+  if (typeof layerSwitcher !== 'undefined' && isMobile()) {
+    forceLegendClosed();
+  }
+
+  updateDashboardView();
   renderForestFireDashboard();
 }
 

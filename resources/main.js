@@ -173,7 +173,7 @@ function parseForestFireArea(value) {
 }
 
 function getForestFireIncidents() {
-  const featureCollection = window.json_koordinat_kebakaran_hutan_20260828_30;
+  const featureCollection = window.json_koordinat_kebakaran_hutan_20260830;
   if (!featureCollection || !Array.isArray(featureCollection.features)) {
     return [];
   }

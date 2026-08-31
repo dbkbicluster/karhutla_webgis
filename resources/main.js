@@ -178,7 +178,18 @@ function getForestFireIncidents() {
     return [];
   }
 
-  return featureCollection.features.map((feature, index) => {
+  const sortedFeatures = [...featureCollection.features].sort((featureA, featureB) => {
+    const aTitik = Number(featureA?.properties?.Titik ?? NaN);
+    const bTitik = Number(featureB?.properties?.Titik ?? NaN);
+
+    if (Number.isFinite(aTitik) && Number.isFinite(bTitik)) {
+      return bTitik - aTitik;
+    }
+
+    return 0;
+  });
+
+  return sortedFeatures.map((feature, index) => {
     const props = feature.properties || {};
     const geometry = feature.geometry || {};
     const coordinates = Array.isArray(geometry.coordinates) ? geometry.coordinates : [null, null];

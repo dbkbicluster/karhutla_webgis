@@ -476,9 +476,9 @@ var lyr_datahotspot28082026_045154_29 = new ol.layer.Vector({
                 declutter: false,
                 source:cluster_datahotspot28082026_045154_29, 
                 style: style_datahotspot28082026_045154_29,
-                popuplayertitle: 'hotspot sipongi 20260830',
+                popuplayertitle: 'hotspot sipongi 20260901',
                 interactive: true,
-    title: 'hotspot sipongi 20260830<br />\
+    title: 'hotspot sipongi 20260901<br />\
     <img src="styles/legend/datahotspot28082026_045154_29_0.png" /> High<br />\
     <img src="styles/legend/datahotspot28082026_045154_29_1.png" /> Medium<br />\
     <img src="styles/legend/datahotspot28082026_045154_29_2.png" /> Low<br />' });
@@ -497,9 +497,9 @@ var lyr_koordinat_kebakaran_hutan_20260830 = new ol.layer.Vector({
                 declutter: false,
                 source:cluster_koordinat_kebakaran_hutan_20260830, 
                 style: style_koordinat_kebakaran_hutan_20260830,
-                popuplayertitle: 'koordinat_kebakaran_hutan_20260830',
+                popuplayertitle: 'koordinat_kebakaran_hutan_20260831',
                 interactive: true,
-    title: 'koordinat_kebakaran_hutan_20260830<br />\
+    title: 'koordinat_kebakaran_hutan_20260831<br />\
     <img src="styles/legend/koordinat_kebakaran_hutan_20260830_0.png" /> Aktif<br />\
     <img src="styles/legend/koordinat_kebakaran_hutan_20260830_1.png" /> Sudah Padam<br />' });
 var group_Karhutla = new ol.layer.Group({

@@ -476,9 +476,9 @@ var lyr_datahotspot28082026_045154_29 = new ol.layer.Vector({
                 declutter: false,
                 source:cluster_datahotspot28082026_045154_29, 
                 style: style_datahotspot28082026_045154_29,
-                popuplayertitle: 'hotspot sipongi 20260901',
+                popuplayertitle: 'hotspot sipongi 20260902',
                 interactive: true,
-    title: 'hotspot sipongi 20260901<br />\
+    title: 'hotspot sipongi 20260902<br />\
     <img src="styles/legend/datahotspot28082026_045154_29_0.png" /> High<br />\
     <img src="styles/legend/datahotspot28082026_045154_29_1.png" /> Medium<br />\
     <img src="styles/legend/datahotspot28082026_045154_29_2.png" /> Low<br />' });

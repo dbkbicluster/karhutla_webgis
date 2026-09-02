@@ -1,6 +1,6 @@
 var size = 0;
 var placement = 'point';
-function categories_koordinat_kebakaran_hutan_20260830(feature, value, size, resolution, labelText,
+function categories_koordinat_kebakaran_hutan_20260902(feature, value, size, resolution, labelText,
                        labelFont, labelFill, bufferColor, bufferWidth,
                        placement, textAlign, offsetX, offsetY, overflow, repeat) {
     var valueStr = (value !== null && value !== undefined) ? value.toString() : 'default';
@@ -35,7 +35,7 @@ default:
 			break;
     }};
 
-var style_koordinat_kebakaran_hutan_20260830 = function(feature, resolution){
+var style_koordinat_kebakaran_hutan_20260902 = function(feature, resolution){
     var context = {
         feature: feature,
         variables: {}
@@ -103,7 +103,7 @@ var style_koordinat_kebakaran_hutan_20260830 = function(feature, resolution){
 		];
 	}
     
-    var style = categories_koordinat_kebakaran_hutan_20260830(feature, value, size, resolution, labelText,
+    var style = categories_koordinat_kebakaran_hutan_20260902(feature, value, size, resolution, labelText,
                           labelFont, labelFill, bufferColor,
                           bufferWidth, placement, textAlign, offsetX, offsetY, overflow, repeat);
 
